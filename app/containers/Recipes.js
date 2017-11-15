@@ -8,6 +8,7 @@ import Recipes from 'components/Recipes'
 import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
 import Pagination from 'components/Pagination'
+import InputFilter from 'components/InputFilter'
 
 class RecipesContainer extends Component {
   static fetchData({ store, params }) {
@@ -66,7 +67,7 @@ class RecipesContainer extends Component {
           title={ title }
         />
         <h2>{ title }</h2>
-
+        <InputFilter />
         <Link to="#" onClick={this._handleFilterClicked}>Show only my Favourite recipes</Link>
         
         <Recipes recipes={ paginData } isFilter={ isFilter }

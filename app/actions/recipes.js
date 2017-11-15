@@ -53,6 +53,16 @@ export const TOGGLE_FILTER = Symbol('TOGGLE_FILTER')
 export function handleFilterClicked () {
   return {
     type: TOGGLE_FILTER
+  } 
+}
+
+export const FILTER_TYPE_NAME = Symbol('FILTER_TYPE_NAME')
+export const FILTER_TYPE_INGREDIENT = Symbol('FILTER_TYPE_INGREDIENT')
+export function handleInputfilter (value, filterType) {
+  let type = 'FILTER_TYPE_' + filterType.toUpperCase()
+  return {
+    type: type,
+    filterType,
+    value
   }
-  
 }
