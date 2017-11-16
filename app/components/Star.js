@@ -23,8 +23,10 @@ class Star extends Component {
         idx = parseInt(id, 10),
         isStar = likedRecipes.indexOf(idx) >= 0,
         starClasses = classnames({
-          active: isStar === true,
-          like: true
+          'btn-warning': isStar === true,
+          'btn-link': !isStar,
+          like: true,
+          btn: true
         })
     return (
       <a onClick={this._onLikeButtonClick} className={starClasses}>Like</a>

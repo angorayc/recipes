@@ -1,19 +1,10 @@
 import { combineReducers } from 'redux'
 import recipes from 'reducers/recipes'
 import recipeDetail from 'reducers/recipeDetail'
-import { TOGGLE_FILTER, STAR_RECIPE, LOADED_RECIPES, FILTER_TYPE_INGREDIENT, FILTER_TYPE_NAME } from 'actions/recipes'
+import { FILTER_TYPE_STAR, STAR_RECIPE, LOADED_RECIPES, 
+  FILTER_TYPE_INGREDIENT, FILTER_TYPE_NAME, FILTER_TYPE_CLEAR } from 'actions/recipes'
 import { clone as _clone } from 'lodash'
 
-function isFilter (state = false, action) {
-  switch(action.type) {
-    case TOGGLE_FILTER:
-      return !state
-      break
-
-    default:
-      return state
-  }
-}
 
 function likedRecipes (state = [], action) {
   let { id } = action,
@@ -31,15 +22,29 @@ function likedRecipes (state = [], action) {
   }
 }
 
-function inputFilter (state = {}, action) {
+function filterType (state = '', action) {
+  switch(action.type) {
+    case FILTER_TYPE_STAR:
+      return action.switchTo ? 'star' : ''
+    case FILTER_TYPE_NAME:
+    case FILTER_TYPE_INGREDIENT:
+      return action.filterType || state
+      break
+    case FILTER_TYPE_CLEAR:
+      return ''
+    default:
+      return state
+  }
+}
+
+function filterInput (state = '', action) {
   switch(action.type) {
     case FILTER_TYPE_NAME:
     case FILTER_TYPE_INGREDIENT:
-      return {
-        filterType: action.filterType,
-        value: action.value
-      }
+      return action.value || state
       break
+    case FILTER_TYPE_CLEAR:
+      return ''
     default:
       return state
   }
@@ -47,10 +52,10 @@ function inputFilter (state = {}, action) {
 
 const rootReducer = combineReducers({
   recipes,
-  isFilter,
   likedRecipes,
   recipeDetail,
-  inputFilter
+  filterType,
+  filterInput
 })
 
 export default rootReducer

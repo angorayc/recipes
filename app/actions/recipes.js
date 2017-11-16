@@ -47,22 +47,24 @@ export function handleStarRecipe (id) {
 
 }
 
-export const TOGGLE_FILTER = Symbol('TOGGLE_FILTER')
+export const FILTER_TYPE_STAR = Symbol('FILTER_TYPE_STAR')
 
 
-export function handleFilterClicked () {
+export function handleFilterClicked (switchTo) {
   return {
-    type: TOGGLE_FILTER
+    type: FILTER_TYPE_STAR,
+    switchTo
   } 
 }
 
-export const FILTER_TYPE_NAME = Symbol('FILTER_TYPE_NAME')
-export const FILTER_TYPE_INGREDIENT = Symbol('FILTER_TYPE_INGREDIENT')
-export function handleInputfilter (value, filterType) {
+export const FILTER_TYPE_NAME = 'FILTER_TYPE_NAME'
+export const FILTER_TYPE_INGREDIENT = 'FILTER_TYPE_INGREDIENT'
+export const FILTER_TYPE_CLEAR = 'FILTER_TYPE_CLEAR'
+export function handleInputfilter (value = '', filterType) {
   let type = 'FILTER_TYPE_' + filterType.toUpperCase()
   return {
     type: type,
     filterType,
-    value
+    value: value.toLowerCase()
   }
 }

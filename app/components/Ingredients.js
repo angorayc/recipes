@@ -5,8 +5,8 @@ const Ingredients = ({ ingredients, qty }) => {
 
   return (
     <div>
-      <h3>ingredients:</h3>
       <ul>
+        <li><mark>ingredients</mark></li>
         {
           (ingredients || []).map((ingredient, i) => {
             let quantity = _get(qty, ingredient.toLowerCase(), '')

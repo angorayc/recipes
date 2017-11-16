@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import { isFunction as _isFunction } from 'lodash'
 import classnames from 'classnames'
 
+const FILTERS = [
+  {name: 'name', classname: 'btn btn-link'},
+  {name: 'ingredient', classname: 'btn btn-link'},
+  {name: 'clear', classname: 'btn btn-link'}
+]
+
 class InputFilter extends Component {
 
 
@@ -25,11 +31,11 @@ class InputFilter extends Component {
   render() {
 
     return (
-      <div>
+      <div className="form-group">
         <input name="inputfilter" ref="inputfilter"/>
         {
-          ['name', 'ingredient'].map((type) => (
-            <button key={`button-${type}`} onClick={this._onFilterClick} value={type}>filter by {type}</button>
+          FILTERS.map(({name, classname}) => (
+            <button key={`button-${name}`} onClick={this._onFilterClick} value={name} className={classname}>filter by {name}</button>
           ))
         }
 

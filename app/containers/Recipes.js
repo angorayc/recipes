@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { loadRecipes, triggerPagination, handleFilterClicked, handleStarRecipe,
-  LOADED_RECIPES_PAGIN, LOADED_RECIPES } from 'actions/recipes'
+  LOADED_RECIPES_PAGIN, LOADED_RECIPES, handleInputfilter } from 'actions/recipes'
 import { Link } from 'react-router'
 import { get as _get, isFunction as _isFunction } from 'lodash'
 import Recipes from 'components/Recipes'
@@ -19,7 +19,10 @@ class RecipesContainer extends Component {
 
   constructor(props) {
     super(props)
-    this._handleFilterClicked = this._handleFilterClicked.bind(this)
+    this._handleStarFilterClicked = this._handleStarFilterClicked.bind(this)
+    this._enableStarFilter = this._handleStarFilterClicked.bind(this, 1)
+    this._disableStarFilter = this._handleStarFilterClicked.bind(this, 0)
+    this._getTitle = this._getTitle.bind(this)
   }
 
   componentDidMount() {
@@ -44,22 +47,36 @@ class RecipesContainer extends Component {
       loadRecipes()
   }
 
-  _handleFilterClicked(e) {
-    e.preventDefault()
+  _handleStarFilterClicked(switchTo) {
     let { handleFilterClicked } = this.props
     if (_isFunction(handleFilterClicked))
-      handleFilterClicked()
-
+      handleFilterClicked(switchTo)
   }
 
+  _getTitle() {
+    let { filterType, params } = this.props,
+        page = _get(params, 'page'),
+        title = 'List page'
+
+    if (filterType)
+      return `List Recipes by ${filterType}`
+
+    if (page)
+      return `List Page - Page ${page}`
+
+    return title
+  }
+
+
   render() {
-    let { params, recipes, isFilter, handleStarRecipe, likedRecipes } = this.props,
+    let { params, recipes, handleStarRecipe, likedRecipes, handleInputfilter,
+          filterType, filterInput } = this.props,
         page = _get(params, 'page'),
         isPagin = !!page,
         paginData = isPagin ? _get(recipes, ['pagin', page], []) : _get(recipes, 'data', []),
         totalPage = _get(recipes, 'totalPage'),
         totalItems = _get(recipes, 'totalItems'),
-        title = page ? `List Page - Page ${page}` : 'List Page'
+        title = this._getTitle()
 
     return (
       <div>
@@ -67,28 +84,34 @@ class RecipesContainer extends Component {
           title={ title }
         />
         <h2>{ title }</h2>
-        <InputFilter />
-        <Link to="#" onClick={this._handleFilterClicked}>Show only my Favourite recipes</Link>
+        <InputFilter handleInputfilter={handleInputfilter} />
+        <p>
+          <span>Show only my Favourite recipes:</span>
+          <span to="#" onClick={this._enableStarFilter} className="btn btn-success">on</span> |
+          <span to="#" onClick={this._disableStarFilter} className="btn btn-danger">off</span>
+        </p>
         
-        <Recipes recipes={ paginData } isFilter={ isFilter }
-          handleStarRecipe={ handleStarRecipe } likedRecipes={likedRecipes} />
+        <Recipes recipes={ paginData }
+          handleStarRecipe={ handleStarRecipe } likedRecipes={likedRecipes}
+          filterType={filterType} filterInput={filterInput} />
 
-        { isFilter ? false : <Pagination totalPage={ totalPage } totalItems={totalItems} /> }
+        { filterType ? false : <Pagination totalPage={ totalPage } totalItems={totalItems} /> }
 
       </div>
     )
   }
 }
 
-function mapStateToProps ({ recipes, isFilter, likedRecipes }) {
-  return { recipes, isFilter, likedRecipes }
+function mapStateToProps ({ recipes, likedRecipes, filterType, filterInput }) {
+  return { recipes, likedRecipes, filterType, filterInput }
 }
 
 const mapDispatchToProps = {
   triggerPagination,
   loadRecipes,
   handleFilterClicked,
-  handleStarRecipe
+  handleStarRecipe,
+  handleInputfilter
 }
 
 export { RecipesContainer }

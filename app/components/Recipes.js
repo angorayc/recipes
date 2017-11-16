@@ -7,6 +7,8 @@ import Recipe from 'components/Recipe'
 
 const NO_STAR_RECIPE_MESSAGE = 'Sorry, you don\'t currently have any starred recipes, get started by starring recipes you like'
 const NO_RECIPES_MESSAGE = 'Sorry, we currently have no recipes for you'
+const NO_MATCH_RECIPES = 'Sorry, nothing matched your filter term'
+
 
 class Recipes extends Component {
 
@@ -14,6 +16,10 @@ class Recipes extends Component {
     super(props)
     this._mapRecipesList = this._mapRecipesList.bind(this)
     this._filterRecipeList = this._filterRecipeList.bind(this)
+    this._filterByName = this._filterByName.bind(this)
+    this._filterByIngredient = this._filterByIngredient.bind(this)
+    this._getList = this._getList.bind(this)
+    this._getMessage = this._getMessage.bind(this)
   }
 
   _mapRecipesList(list) {
@@ -27,7 +33,7 @@ class Recipes extends Component {
 
   _filterRecipeList() {
 
-    let { handleStarRecipe, likedRecipes, recipes } = this.props,
+    let { likedRecipes, recipes } = this.props,
         faviList = recipes.filter((q, i) => {
           let id = _get(q, 'id')
           return likedRecipes.indexOf(id) >= 0
@@ -35,15 +41,62 @@ class Recipes extends Component {
     return this._mapRecipesList(faviList)
   }
 
+  _filterByName() {
+    let { filterInput, recipes } = this.props,
+        list = recipes.filter((q, i) => {
+          let name = _get(q, 'content.name', '')
+          return name.toLowerCase().indexOf(filterInput) >= 0
+        })
+    return this._mapRecipesList(list)
+  }
+
+  _filterByIngredient() {
+    let { filterInput, recipes } = this.props,
+        list = recipes.filter((q) => {
+          let ingredient = _get(q, 'content.ingredients', []).map((i) => i.toLowerCase())
+          return ingredient.indexOf(filterInput) >= 0
+        })
+    return this._mapRecipesList(list)
+  }
+
+  _getList() {
+    let { recipes, filterType } = this.props
+    filterType = filterType || ''
+    switch(filterType.toLowerCase()) {
+      case 'star':
+        return this._filterRecipeList()
+      case 'name':
+        return this._filterByName()
+      case 'ingredient':
+        return this._filterByIngredient()
+      default:
+        return this._mapRecipesList(recipes)
+    }
+  }
+
+  _getMessage() {
+    let { recipes, filterType } = this.props
+    filterType = filterType || ''
+    switch(filterType.toLowerCase()) {
+      case 'star':
+        return NO_STAR_RECIPE_MESSAGE
+      case 'name':
+      case 'ingredient':
+        return NO_MATCH_RECIPES
+      default:
+        return NO_RECIPES_MESSAGE
+    }
+  }
+
 
   render() {
-    let { recipes, isStar, isFilter, likedRecipes } = this.props,
-        message = isFilter ? NO_STAR_RECIPE_MESSAGE : NO_RECIPES_MESSAGE,
-        list = isFilter ? this._filterRecipeList() : this._mapRecipesList(recipes)
+    let message = this._getMessage(),
+        list = this._getList()
+
 
     return (
       <div>
-        <span> Filter: { isFilter ? 'ON' : 'OFF' }</span>
+        
         { list.length ? list : <p>{ message }</p> }
         
       </div>

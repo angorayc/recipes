@@ -14,7 +14,6 @@ class Recipe extends Component {
   render() {
     let { recipe, handleStarRecipe, likedRecipes } = this.props,
         id = _get(recipe, 'id'),
-        isStar = _get(recipe, 'isStar', ''),
         content = _get(recipe, 'content', {}),
         name = _get(content, 'name', ''),
         ingredients = _get(content, 'ingredients', ''),
@@ -28,7 +27,7 @@ class Recipe extends Component {
           <img src={ imageUrl } alt={ name } />
           <p><Link to={`/recipes/${id}`}>{ `#${id} ${name}` }</Link></p>
           <p>Cooking Time : { cookingTime }</p>
-          <Star isStar={ isStar } id={ id } handleStarRecipe={ handleStarRecipe } likedRecipes={likedRecipes} />
+          <Star id={ id } handleStarRecipe={ handleStarRecipe } likedRecipes={likedRecipes} />
           <Ingredients ingredients={ ingredients } qty={qty} />
         </div>
     ) : false
