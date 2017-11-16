@@ -11,7 +11,7 @@ class Intro extends Component {
           title="Recipes"
         />
         <h1>Recipes</h1>
-        <Link to="/recipes/pages/1" >list recipes</Link>
+        <Link to="/recipes/page/1" >list recipes</Link>
       </div>
     )
   }

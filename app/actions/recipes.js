@@ -57,14 +57,20 @@ export function handleFilterClicked (switchTo) {
   } 
 }
 
-export const FILTER_TYPE_NAME = 'FILTER_TYPE_NAME'
-export const FILTER_TYPE_INGREDIENT = 'FILTER_TYPE_INGREDIENT'
-export const FILTER_TYPE_CLEAR = 'FILTER_TYPE_CLEAR'
+
+export const FILTER_TYPE_CLEAR = Symbol('FILTER_TYPE_CLEAR')
+export const FILTER_TYPE_INPUT = Symbol('FILTER_TYPE_INPUT')
 export function handleInputfilter (value = '', filterType) {
-  let type = 'FILTER_TYPE_' + filterType.toUpperCase()
+  filterType.toLowerCase()
+
+  if (filterType !== 'clear')
+    return {
+      type: FILTER_TYPE_INPUT,
+      filterType,
+      value: value.toLowerCase()
+    }
+
   return {
-    type: type,
-    filterType,
-    value: value.toLowerCase()
+    type: FILTER_TYPE_CLEAR
   }
 }

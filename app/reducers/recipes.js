@@ -1,7 +1,5 @@
 import * as ActionType from 'actions/recipes'
-import Immutable from 'immutable'
 import { get as _get } from 'lodash'
-
 
 let defaultState = {
   data: [],

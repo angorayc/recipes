@@ -1,8 +1,7 @@
 let _ = require('lodash')
 let data = require('./recipes')
-const dataLength = data.recipes.length
-const lastIndexOfData = dataLength ? (dataLength - 1) : 0
-
+const DATA_LENGTH = (data.recipes || []).length
+const ITEMS_PER_PAGE = 10
 
 function recipe (id) {
 
@@ -17,18 +16,17 @@ function recipe (id) {
 
 export function getRecipes (pageIndex) {
 
-
   let isPagin = !!pageIndex,
-      itemsPerPage = isPagin ? 10 : dataLength,
+      itemsPerPage = (isPagin && DATA_LENGTH > ITEMS_PER_PAGE) ? ITEMS_PER_PAGE : DATA_LENGTH,
       page = pageIndex - 1,
-      totalPage = Math.ceil(dataLength / itemsPerPage),
+      totalPage = Math.ceil(DATA_LENGTH / itemsPerPage),
       start = !page ? 0 : page * itemsPerPage,
-      end = Math.min(start + itemsPerPage, dataLength)
+      end = Math.min(start + itemsPerPage, DATA_LENGTH)
 
   if (!pageIndex) {
     return {
       data: _.range(start, end).map((id) => recipe(id)),
-      totalItems: dataLength  
+      totalItems: DATA_LENGTH  
     } 
   }
 
@@ -37,7 +35,7 @@ export function getRecipes (pageIndex) {
     totalPage: totalPage,
     page: isPagin ? pageIndex : 1,
     itemsPerPage: itemsPerPage,
-    totalItems: dataLength
+    totalItems: DATA_LENGTH
   }
 
 }

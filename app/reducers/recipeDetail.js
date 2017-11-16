@@ -1,15 +1,11 @@
-import * as ActionType from 'actions/recipes'
-import _ from 'lodash'
+import { LOADED_RECIPE_DETAIL } from 'actions/recipes'
 
 let defaultState = {}
 
 export default function(state = defaultState, action) {
   switch(action.type) {
-    case ActionType.LOADED_RECIPE_DETAIL:
-      return action.response
-
-    //case ActionType.STAR_RECIPE:
-      //return state.set('isStar', !state.get('isStar'))
+    case LOADED_RECIPE_DETAIL:
+      return action.response || state
 
     default:
       return state

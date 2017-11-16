@@ -1,23 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { range as _range, isFunction as _isFunction } from 'lodash'
+import { range as _range } from 'lodash'
 
 const ITEMS_PER_PAGE = 10
 
 class Pagination extends Component {
-
-  constructor(props) {
-    super(props)
-    // this._handlePaginClick = this._handlePaginClick.bind(this)
-  }
-
-  // _handlePaginClick(e) {
-  //   e.preventDefault()
-  //   let page = e.currentTarget.innerHtml
-  //   console.log(page)
-  //   // if (_isFunction(handlePaginClick))
-  //   //   handlePaginClick(page)
-  // }
 
   render() {
 

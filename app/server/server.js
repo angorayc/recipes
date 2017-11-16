@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === 'production') {
 server.set('views', path.join(__dirname, 'views'))
 server.set('view engine', 'ejs')
 
-// mock apis
+
 server.get('/api/recipes', (req, res)=> {
   let { getRecipes } = require('./mock_api')
   let { page } = req.query
@@ -48,10 +48,7 @@ server.get('/api/recipes', (req, res)=> {
   res.send(recipes)
 })
 
-// server.get('/api/users/:id', (req, res)=> {
-//   let { getUser } = require('./mock_api')
-//   res.send(getUser(req.params.id))
-// })
+
 server.get('/api/recipes/:id', (req, res)=> {
   let { getRecipe } = require('./mock_api')
   let recipe = getRecipe(req.params.id)
@@ -67,7 +64,6 @@ server.get('*', (req, res, next)=> {
 })
 server.use((err, req, res, next)=> {
   console.log(err.stack)
-  // TODO report error here or do some further handlings
   res.status(500).send("something went wrong...")
 })
 

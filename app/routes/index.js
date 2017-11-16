@@ -12,7 +12,6 @@ export default function(history) {
   return (
     <Router history={history}>
       <Route path="/" component={App}>
-        <Route path="recipes" component={Recipes} />
         <Route path="recipes/:id" component={Recipe} />
         <Route path="recipes/page/:page" component={Recipes} />
         <IndexRoute component={Intro} />

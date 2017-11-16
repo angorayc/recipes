@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import recipes from 'reducers/recipes'
 import recipeDetail from 'reducers/recipeDetail'
 import { FILTER_TYPE_STAR, STAR_RECIPE, LOADED_RECIPES, 
-  FILTER_TYPE_INGREDIENT, FILTER_TYPE_NAME, FILTER_TYPE_CLEAR } from 'actions/recipes'
+  FILTER_TYPE_INPUT, FILTER_TYPE_CLEAR } from 'actions/recipes'
 import { clone as _clone } from 'lodash'
 
 
@@ -26,8 +26,7 @@ function filterType (state = '', action) {
   switch(action.type) {
     case FILTER_TYPE_STAR:
       return action.switchTo ? 'star' : ''
-    case FILTER_TYPE_NAME:
-    case FILTER_TYPE_INGREDIENT:
+    case FILTER_TYPE_INPUT:
       return action.filterType || state
       break
     case FILTER_TYPE_CLEAR:
@@ -39,8 +38,7 @@ function filterType (state = '', action) {
 
 function filterInput (state = '', action) {
   switch(action.type) {
-    case FILTER_TYPE_NAME:
-    case FILTER_TYPE_INGREDIENT:
+    case FILTER_TYPE_INPUT:
       return action.value || state
       break
     case FILTER_TYPE_CLEAR:
