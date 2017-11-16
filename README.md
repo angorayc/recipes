@@ -8,9 +8,9 @@
 5. Pagination
 
 ## Routes
-path /
-path recipes/:id
-path recipes/page/:page
+1. path /
+2. path recipes/:id
+3. path recipes/page/:page
 
 ## APIs
 
