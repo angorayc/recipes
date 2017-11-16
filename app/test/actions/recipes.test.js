@@ -28,25 +28,30 @@ describe('Action::Recipes', function(){
     })
   })
 
-  // describe('#handleInputfilter()', function(){
-  //   it('returns correct action `CALL_API` info', function(){
-  //     let filterType = 'clear',
-  //         action = actionCreator.handleInputfilter('', filterType)
-  //     console.log(filterType, action[CALL_API])
-  //     expect(action[CALL_API]).to.deep.equal({
-  //       type: ActionType.FILTER_TYPE_CLEAR
-  //     })
-  //   })
+  describe('#handleInputfilter()', function(){
+    describe('given "clear" as filterType', function() {
+      it('should returns correct action type', function(){
+        let filterType = 'CLEAR',
+            action = actionCreator.handleInputfilter('', filterType)
 
-  //   it('returns correct action `CALL_API` info', function(){
-  //     let filterType = 'FILTER_TYPE',
-  //         value = 'VALUE',
-  //         action = actionCreator.handleInputfilter(value, filterType)
-  //     expect(action[CALL_API]).to.deep.equal({
-  //       type: ActionType.FILTER_TYPE_INPUT,
-  //       filterType: filterType.toLowerCase(),
-  //       value: value.toLowerCase()
-  //     })
-  //   })
-  // })
+        expect(action).to.deep.equal({
+          type: ActionType.FILTER_TYPE_CLEAR
+        })
+      })
+    })
+
+    describe('given other value as filterType', function() {
+      it('returns correct action type', function(){
+        let filterType = 'FILTER_TYPE',
+            value = 'VALUE',
+            action = actionCreator.handleInputfilter(value, filterType)
+
+        expect(action).to.deep.equal({
+          type: ActionType.FILTER_TYPE_INPUT,
+          filterType: filterType.toLowerCase(),
+          value: value.toLowerCase()
+        })
+      })
+    })
+  })
 })

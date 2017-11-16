@@ -63,8 +63,7 @@ export function handleFilterClicked (switchTo) {
 export const FILTER_TYPE_CLEAR = Symbol('FILTER_TYPE_CLEAR')
 export const FILTER_TYPE_INPUT = Symbol('FILTER_TYPE_INPUT')
 export function handleInputfilter (value = '', filterType = '') {
-  filterType.toLowerCase()
-
+  filterType = filterType.toLowerCase()
   if (filterType !== 'clear') {
     return {
       type: FILTER_TYPE_INPUT,
@@ -73,7 +72,6 @@ export function handleInputfilter (value = '', filterType = '') {
     }
   }
     
-
   return {
     type: FILTER_TYPE_CLEAR
   }
