@@ -56,7 +56,7 @@ class RecipesContainer extends Component {
   _getTitle() {
     let { filterType, params } = this.props,
         page = _get(params, 'page'),
-        title = 'List page'
+        title = 'List All Recipes'
 
     if (filterType)
       return `List Recipes by ${filterType}`

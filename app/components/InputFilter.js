@@ -22,7 +22,6 @@ class InputFilter extends Component {
         value = this.refs.inputfilter.value,
         type = e.target.value
 
-    //console.log(type, value)
     if (_isFunction(handleInputfilter))
       handleInputfilter(value, type)
   }

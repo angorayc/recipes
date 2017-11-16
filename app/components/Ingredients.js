@@ -5,17 +5,15 @@ const Ingredients = ({ ingredients, qty }) => {
 
   return (
     <div>
-      <ul>
-        <li><mark>ingredients</mark></li>
+        <p className="card-text">ingredients:</p>
         {
           (ingredients || []).map((ingredient, i) => {
             let quantity = _get(qty, ingredient.toLowerCase(), '')
 
             quantity = (_isNumber(quantity)) ? `${quantity} x ` : quantity
-            return <li key={`${ingredient}-${i}`} >{ quantity }{ ingredient }</li>
+            return <p className="card-text" key={`${ingredient}-${i}`} >{ quantity }{ ingredient }</p>
           })
         }
-      </ul>
     </div>  
   )  
 }

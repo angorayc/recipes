@@ -23,12 +23,14 @@ class Recipe extends Component {
         
 
     return id ? (
-        <div key={id}>
-          <img src={ imageUrl } alt={ name } />
-          <p><Link to={`/recipes/${id}`}>{ `#${id} ${name}` }</Link></p>
-          <p>Cooking Time : { cookingTime }</p>
-          <Star id={ id } handleStarRecipe={ handleStarRecipe } likedRecipes={likedRecipes} />
-          <Ingredients ingredients={ ingredients } qty={qty} />
+        <div key={id} className="card">
+          <img src={ imageUrl } alt={ name } className="card-img-top"/>
+          <div className="card-body">
+            <h4 className="card-title"><Link to={`/recipes/${id}`}>{ `#${id} ${name}` }</Link></h4>
+            <p className="card-text">Cooking Time : { cookingTime }</p>
+            <Star id={ id } handleStarRecipe={ handleStarRecipe } likedRecipes={likedRecipes} />
+            <Ingredients ingredients={ ingredients } qty={qty} />
+          </div>
         </div>
     ) : false
   }
