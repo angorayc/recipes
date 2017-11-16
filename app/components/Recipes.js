@@ -44,8 +44,8 @@ class Recipes extends Component {
   _filterByName() {
     let { filterInput, recipes } = this.props,
         list = recipes.filter((q, i) => {
-          let name = _get(q, 'content.name', '')
-          return name.toLowerCase().indexOf(filterInput) >= 0
+          let name = _get(q, 'content.name')
+          return filterInput ? name.toLowerCase().indexOf(filterInput) >= 0 : false
         })
     return this._mapRecipesList(list)
   }

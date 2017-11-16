@@ -27,7 +27,7 @@ class Recipe extends Component {
           <img src={ imageUrl } alt={ name } className="card-img-top"/>
           <div className="card-body">
             <h4 className="card-title"><Link to={`/recipes/${id}`}>{ `#${id} ${name}` }</Link></h4>
-            <p className="card-text">Cooking Time : { cookingTime }</p>
+            <p className="card-text time">{ `Cooking Time : ${cookingTime}` }</p>
             <Star id={ id } handleStarRecipe={ handleStarRecipe } likedRecipes={likedRecipes} />
             <Ingredients ingredients={ ingredients } qty={qty} />
           </div>
