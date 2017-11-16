@@ -7,6 +7,11 @@
 4. Star a recipe
 5. Pagination
 
+## Routes
+path /
+path recipes/:id
+path recipes/page/:page
+
 ## APIs
 
 1. List all recipes
