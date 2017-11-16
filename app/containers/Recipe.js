@@ -33,7 +33,12 @@ class RecipeContainer extends Component {
         <Recipe recipe={recipeDetail} handleStarRecipe={handleStarRecipe} likedRecipes={likedRecipes} />
         <Link to="/recipes/page/1">Back</Link>
       </div>
-    ) : <p>Sorry, this recipe doesn't exist or may have been removed. <Link to="/recipes">Back</Link></p>
+    ) : (
+      <div>
+        <p className="error-msg">Sorry, this recipe doesn't exist or may have been removed.</p>
+        <Link to="/recipes">Back</Link>
+      </div>
+    )
   }
 }
 
@@ -47,7 +52,7 @@ const mapDispatchToProps = {
 }
 
 RecipeContainer.propTypes = {
-  recipeDetail: PropTypes.object.isRequired
+  recipeDetail: PropTypes.object
 }
 
 

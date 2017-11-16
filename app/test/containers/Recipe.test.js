@@ -4,29 +4,36 @@ import { mount } from 'enzyme'
 import { browserHistory } from 'react-router'
 
 describe('Container::RecipeContainer', function(){
-  let props
 
-  function renderDoc () {
+
+  function renderDoc (props) {
     return mount(<RecipeContainer {...props}/>)
   }
-  beforeEach(function(){
-    props = {
+
+
+  it('fetches recipe details on mounted', function(){
+    let props = {
+      loadRecipeDetail: sinon.stub(),
+      params: {
+        id: 222
+      }
+    }
+    let doc = renderDoc(props)
+    expect(props.loadRecipeDetail).to.have.been.calledWith({
+      id: props.params.id
+    })
+  })
+
+  it('show message when no recipe details to show', function(){
+    let props = {
       loadRecipeDetail: sinon.stub(),
       params: {
         id: 222
       },
-      question: {
-        id: 222,
-        content: {}
-      }
+      recipeDetail: {}
     }
-  })
-
-  it('fetches recipe details on mounted', function(){
-    let doc = renderDoc()
-    expect(props.loadRecipeDetail).to.have.been.calledWith({
-      id: props.params.id
-    })
+    let doc = renderDoc(props)
+    expect(doc.find('.error-msg').text()).to.equal('Sorry, this recipe doesn\'t exist or may have been removed.')
   })
 
 })

@@ -5,9 +5,9 @@ import { get as _get } from 'lodash'
 import Recipe from 'components/Recipe'
 
 
-const NO_STAR_RECIPE_MESSAGE = 'Sorry, you don\'t currently have any starred recipes, get started by starring recipes you like'
-const NO_RECIPES_MESSAGE = 'Sorry, we currently have no recipes for you'
-const NO_MATCH_RECIPES = 'Sorry, nothing matched your filter term'
+export const NO_STAR_RECIPE_MESSAGE = 'Sorry, you don\'t currently have any starred recipes, get started by starring recipes you like'
+export const NO_RECIPES_MESSAGE = 'Sorry, we currently have no recipes for you'
+export const NO_MATCH_RECIPES = 'Sorry, nothing matched your filter term'
 
 
 class Recipes extends Component {
@@ -97,7 +97,7 @@ class Recipes extends Component {
     return (
       <div>
         
-        { list.length ? list : <p>{ message }</p> }
+        { list.length ? list : <p className="error-msg">{ message }</p> }
         
       </div>
     )
