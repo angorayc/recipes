@@ -12,7 +12,9 @@ export function loadRecipes(page, type) {
       method: 'get',
       path: '/api/recipes',
       successType,
-      query: { page }
+      query: {
+        page: page || ''
+      }
     }
   }
 }
@@ -60,15 +62,17 @@ export function handleFilterClicked (switchTo) {
 
 export const FILTER_TYPE_CLEAR = Symbol('FILTER_TYPE_CLEAR')
 export const FILTER_TYPE_INPUT = Symbol('FILTER_TYPE_INPUT')
-export function handleInputfilter (value = '', filterType) {
+export function handleInputfilter (value = '', filterType = '') {
   filterType.toLowerCase()
 
-  if (filterType !== 'clear')
+  if (filterType !== 'clear') {
     return {
       type: FILTER_TYPE_INPUT,
-      filterType,
-      value: value.toLowerCase()
+      value: value.toLowerCase(),
+      filterType
     }
+  }
+    
 
   return {
     type: FILTER_TYPE_CLEAR

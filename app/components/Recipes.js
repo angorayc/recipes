@@ -107,7 +107,7 @@ class Recipes extends Component {
 Recipes.propTypes = {
   recipes: PropTypes.array.isRequired,
   isFilter: PropTypes.bool,
-  handleStarRecipe: PropTypes.func.isRequired
+  handleStarRecipe: PropTypes.func
 }
 
 

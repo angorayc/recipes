@@ -4,15 +4,17 @@ import { Link } from 'react-router'
 import React from 'react'
 import { shallow } from 'enzyme'
 
-describe('Container::Recipes', function(){
+describe('Container::RecipesContainer', function(){
   let props
   beforeEach(function(){
     props = {
       loadRecipes: sinon.stub(),
-      recipes: [
-        { id: 1, content: {} },
-        { id: 2, content: {} }
-      ]
+      recipes: {
+        data: [
+          { id: 1, content: {} },
+          { id: 2, content: {} }
+        ]  
+      }
     }
   })
 
@@ -20,12 +22,12 @@ describe('Container::Recipes', function(){
     let doc = shallow(<RecipesContainer {...props}/>)
     let recipesComp = doc.find(Recipes)
 
-    expect(recipesComp.props().recipes).to.equal(props.recipes)
+    expect(recipesComp.props().recipes).to.equal(props.recipes.data)
   })
-  it('renders a title', function(){
+  it('renders a Recipes component', function(){
     let doc = shallow(<RecipesContainer {...props}/>)
-    let link = doc.find('h2')
+    
 
-    expect(link).to.exist
+    expect(doc.find(Recipes)).to.exist
   })
 })

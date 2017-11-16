@@ -22,7 +22,7 @@ class RecipeContainer extends Component {
     let { recipeDetail, handleStarRecipe, params, likedRecipes } = this.props,
         id = _get(recipeDetail, 'id'),
         name = _get(recipeDetail, 'content.name'),
-        isLike = likedRecipes.indexOf(id) >= 0
+        isLike = (likedRecipes || []).indexOf(id) >= 0
 
     return name ? (
       <div>

@@ -1,13 +1,13 @@
 import React from 'react'
-import Container, { Recipe } from 'containers/Recipe'
+import Container, { RecipeContainer } from 'containers/Recipe'
 import { mount } from 'enzyme'
 import { browserHistory } from 'react-router'
 
-describe('Container::Recipe', function(){
+describe('Container::RecipeContainer', function(){
   let props
 
   function renderDoc () {
-    return mount(<Recipe {...props}/>)
+    return mount(<RecipeContainer {...props}/>)
   }
   beforeEach(function(){
     props = {
@@ -22,11 +22,10 @@ describe('Container::Recipe', function(){
     }
   })
 
-  it('fetches question details on mounted', function(){
+  it('fetches recipe details on mounted', function(){
     let doc = renderDoc()
     expect(props.loadRecipeDetail).to.have.been.calledWith({
-      id: props.params.id,
-      history: browserHistory
+      id: props.params.id
     })
   })
 

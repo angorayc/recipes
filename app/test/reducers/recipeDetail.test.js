@@ -11,8 +11,7 @@ describe('Reducer::::RecipeDetail', function(){
         }
 
         let newState = reducer(undefined, action)
-
-        expect(newState.toJS()).to.deep.equal({ id: '1', content: {} })
+        expect(newState).to.deep.equal({ id: '1', content: {} })
       })
     })
 
