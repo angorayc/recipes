@@ -37,14 +37,12 @@ eg: `$ ./bin/generate component myNamespace/MyComponent`
 - Universal rendering, with async data support
 - Server side redirect
 - Separate vendor and app js files
-- Use [Immutable](https://facebook.github.io/immutable-js/) as store data
 - Hot Reload on client side by Webpack
 - Hot Reload on server side ([ref](https://medium.com/@kevinsimper/dont-use-nodemon-there-are-better-ways-fc016b50b45e))
 
 ## Stack:
 - [react](https://github.com/facebook/react)@15.4.2
 - [react-router](https://github.com/ReactTraining/react-router)@3.0.5
-- [Immutable.js](https://facebook.github.io/immutable-js/)
 - [Webpack](https://webpack.github.io/)@2.2
 - [Babel](https://babeljs.io/)@6
 - Express as isomorphic server
