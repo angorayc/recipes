@@ -1,6 +1,139 @@
-[![Build Status](https://travis-ci.org/mz026/universal-redux-template.svg?branch=master)](https://travis-ci.org/mz026/universal-redux-template)
+# List Recipes
 
-# Universal Redux Template
+## Requirements
+1. Recipes list
+2. Display a single recipe page
+3. Filter recipes
+4. Star a recipe
+5. Pagination
+
+## APIs
+
+1. List all recipes
+
+```
+GET /api/recipes HTTP/1.1
+Host: localhost:3000
+Cache-Control: no-cache
+
+{
+    "data": [
+        {
+            "id": 0,
+            "content": {
+                "name": "Lemon Chicken",
+                "imageUrl": "http://ichef.bbci.co.uk/food/ic/food_16x9_608/recipes/lemonchicken_11654_16x9.jpg",
+                "ingredients": [
+                    "Chicken",
+                    "Lemon",
+                    "Thyme"
+                ],
+                "qty": {
+                    "Chicken": 4,
+                    "Lemon": 1,
+                    "Thyme": "1 tsp"
+                },
+                "cookingTime": "30 minutes"
+            }
+        },
+        {
+            "id": 1,
+            "content": {
+                "name": "Beef Stroganoff",
+                "imageUrl": "http://ichef.bbci.co.uk/food/ic/food_16x9_608/recipes/beefstroganoffwithsa_89439_16x9.jpg",
+                "ingredients": [
+                    "Beef",
+                    "Mustard",
+                    "Mushrooms"
+                ],
+                "cookingTime": "30 minutes"
+            }
+        },
+        {
+            "id": 2,
+            "content": {
+                "name": "Chicken Caesar Salad",
+                "imageUrl": "http://ichef.bbci.co.uk/food/ic/food_16x9_608/recipes/chickencaesarsalad_84099_16x9.jpg",
+                "ingredients": [
+                    "Lettuce",
+                    "Chicken",
+                    "Parmesan",
+                    "Croutons"
+                ],
+                "cookingTime": "25 minutes"
+            }
+        }
+    ],
+    "totalItems": 3
+}
+```
+
+2. List Recipes By Page
+
+```
+GET /api/recipes?page=1 HTTP/1.1
+Host: localhost:3000
+Cache-Control: no-cache
+
+
+{
+    "data": {
+        "1": [
+            {
+                "id": 0,
+                "content": {
+                    "name": "Lemon Chicken",
+                    "imageUrl": "http://ichef.bbci.co.uk/food/ic/food_16x9_608/recipes/lemonchicken_11654_16x9.jpg",
+                    "ingredients": [
+                        "Chicken",
+                        "Lemon",
+                        "Thyme"
+                    ],
+                    "qty": {
+                        "Chicken": 4,
+                        "Lemon": 1,
+                        "Thyme": "1 tsp"
+                    },
+                    "cookingTime": "30 minutes"
+                }
+            },
+            {
+                "id": 1,
+                "content": {
+                    "name": "Beef Stroganoff",
+                    "imageUrl": "http://ichef.bbci.co.uk/food/ic/food_16x9_608/recipes/beefstroganoffwithsa_89439_16x9.jpg",
+                    "ingredients": [
+                        "Beef",
+                        "Mustard",
+                        "Mushrooms"
+                    ],
+                    "cookingTime": "30 minutes"
+                }
+            },
+            {
+                "id": 2,
+                "content": {
+                    "name": "Chicken Caesar Salad",
+                    "imageUrl": "http://ichef.bbci.co.uk/food/ic/food_16x9_608/recipes/chickencaesarsalad_84099_16x9.jpg",
+                    "ingredients": [
+                        "Lettuce",
+                        "Chicken",
+                        "Parmesan",
+                        "Croutons"
+                    ],
+                    "cookingTime": "25 minutes"
+                }
+            }
+        ]
+    },
+    "totalPage": 1,
+    "page": "1",
+    "itemsPerPage": 3,
+    "totalItems": 3
+}
+```
+
+
 A boilerplate doing universal/isomorphic rendering with Redux + React-router + Express, based on [Redux-Realword-Example](https://github.com/reactjs/redux/tree/master/examples/real-world)
 
 ## Philosophy
